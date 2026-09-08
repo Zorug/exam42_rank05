@@ -223,7 +223,8 @@ vect2 vect2::operator++(int)
 {
 	vect2 temp = *this;
 
-	++(*this);
+	//++(*this);
+	(*this).operator++();
 	return(temp);
 }
 
@@ -246,7 +247,8 @@ vect2 vect2::operator--(int)
 {
 	vect2 temp = *this;
 
-	--(*this);
+	//--(*this);
+	(*this).operator();
 	return(temp);
 }
 
