@@ -14,17 +14,12 @@ bigint::bigint()
 // Construtor a partir de um unsigned int.
 // Usamos um stringstream para converter o número para a sua representação
 // em string de forma simples (equivalente a um "to_string").
-/*bigint::bigint(unsigned int num)
+bigint::bigint(unsigned int num)
 {
 	std::stringstream ss;
 	ss << num;
 	this->str = ss.str();
 	// std::cout << "str: " << str << std::endl;
-}*/
-
-bigint::bigint(unsigned int num)
-{
-    this->str = std::to_string(num);
 }
 
 // Construtor de cópia: reaproveita o operator= já definido,
@@ -210,6 +205,20 @@ bigint bigint::operator++(int)
 	return(temp);
 }
 
+*/
+
+// operator<< com unsigned int: desloca os dígitos para a esquerda (multiplica por 10^n)
+bigint bigint::operator<<(unsigned int n) const {
+    bigint temp = *this;
+    
+    // ➕ Adiciona 'n' zeros no fim da string um a um usando push_back
+    for (unsigned int i = 0; i < n; ++i) {
+        temp.str.push_back('0');
+    }
+    
+    return temp;
+}
+
 // operator>> com unsigned int: desloca os dígitos para a direita,
 // ou seja, divide por 10^n (parte inteira), removendo os últimos
 // n caracteres da string (ex: "1337" >> 2 -> "13").
@@ -226,35 +235,6 @@ bigint bigint::operator>>(unsigned int n)const
 		temp.str.erase(temp.str.length() - n, n);
 	}
 	return(temp);
-}*/
-
-// operator<< com unsigned int: desloca os dígitos para a esquerda (multiplica por 10^n)
-bigint bigint::operator<<(unsigned int n) const {
-    bigint temp = *this;
-    
-    // ➕ Adiciona 'n' zeros no fim da string um a um usando push_back
-    for (unsigned int i = 0; i < n; ++i) {
-        temp.str.push_back('0');
-    }
-    
-    return temp;
-}
-
-// operator>> com unsigned int: desloca os dígitos para a direita (divide por 10^n)
-bigint bigint::operator>>(unsigned int n) const {
-    bigint temp = *this;
-    size_t len = temp.str.length();
-    
-    if (n >= len) {
-        temp.str = "0"; // Se deslocarmos mais do que o tamanho, o resultado é "0"
-    } else {
-        // ➖ Remove os últimos 'n' caracteres um a um usando pop_back
-        for (unsigned int i = 0; i < n; ++i) {
-            temp.str.pop_back();
-        }
-    }
-    
-    return temp;
 }
 
 // Versões "com atribuição" (<<= e >>=): reaproveitam os operadores acima.

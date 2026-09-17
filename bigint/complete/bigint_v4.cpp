@@ -6,31 +6,18 @@ bigint::bigint()
 	this->str = "0";
 }
 
-/*bigint::bigint(unsigned int num)
+bigint::bigint(unsigned int num)
 {
 	std::stringstream ss;
 	ss << num;
 	this->str = ss.str();
 	// std::cout << "str: " << str << std::endl;
-}*/
-
-bigint::bigint(unsigned int num)
-{
-    this->str = std::to_string(num);
 }
 
 bigint::bigint(const bigint& source)
 {
 	(*this) = source;
 }
-
-/*bigint& bigint::operator=(const bigint& source)
-{
-	if(this == &source)
-		return(*this);
-	this->str = source.str;
-	return(*this);
-}*/
 
 bigint& bigint::operator=(const bigint& source)
 {
@@ -108,11 +95,6 @@ std::string addition(const bigint& obj1, const bigint& obj2)
 
 bigint bigint::operator+(const bigint& other)const
 {
-	//bigint temp(other);
-	//temp.str.clear();
-	//std::string result = addition(*this, other);
-	//temp.str = result;
-	//std::cout << "r: " << result << std::endl;
 	bigint temp; // Cria um objeto bigint vazio (evita a cópia desnecessária)
 	temp.str = addition(*this, other); // Atribui o resultado da soma
 
@@ -138,29 +120,6 @@ bigint bigint::operator++(int)
 	return(temp);
 }
 
-
-/*bigint bigint::operator<<(unsigned int n)const
-{
-	bigint temp = *this;
-
-	temp.str.insert(temp.str.end(), n, '0');
-	//std::cout << temp.str << std::endl;
-	return(temp);
-}
-
-bigint bigint::operator>>(unsigned int n)const
-{
-	bigint temp = *this;
-	size_t len = temp.str.length();
-	if(n >= len)
-		temp.str = "0";
-	else
-	{
-		temp.str.erase(temp.str.length() - n, n); // ilk parametre: silme yapacağın yerin başlangıç indexi, diğeri: kaç tane eleman silinecek
-	}
-	return(temp);
-}*/
-
 bigint bigint::operator<<(unsigned int n) const {
     bigint temp = *this;
     
@@ -171,19 +130,17 @@ bigint bigint::operator<<(unsigned int n) const {
     return temp;
 }
 
-bigint bigint::operator>>(unsigned int n) const {
-    bigint temp = *this;
-    size_t len = temp.str.length();
-    
-    if (n >= len) {
-        temp.str = "0";
-    } else {
-        for (unsigned int i = 0; i < n; ++i) {
-            temp.str.pop_back();
-        }
-    }
-    
-    return temp;
+bigint bigint::operator>>(unsigned int n)const
+{
+	bigint temp = *this;
+	size_t len = temp.str.length();
+	if(n >= len)
+		temp.str = "0";
+	else
+	{
+		temp.str.erase(temp.str.length() - n, n);
+	}
+	return(temp);
 }
 
 bigint& bigint::operator<<=(unsigned int n)
@@ -254,7 +211,7 @@ bool bigint::operator<(const bigint& other) const
 
 	if(len1 != len2)
 		return(len1 < len2);
-	return(str1 < str2);  // thanks for your feedback, mjuicha!! o7
+	return(str1 < str2);
 }
 
 bool bigint::operator>(const bigint& other) const
