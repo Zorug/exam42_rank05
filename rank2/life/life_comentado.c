@@ -26,7 +26,9 @@ int init_game(t_game* game, char* argv[])
 	game->height = atoi(argv[2]);
 	game->iterations = atoi(argv[3]);
 
-	game->alive = 'O';   /* como uma celula viva e impressa  */
+	/* ATENCAO: o tester espera o DIGITO zero '0' para a celula viva
+	   (e nao a letra 'O'), por isso usamos '0' aqui. */
+	game->alive = '0';   /* como uma celula viva e impressa  */
 	game->dead = ' ';    /* como uma celula morta e impressa */
 
 	/* A caneta comeca no canto superior esquerdo (linha 0, coluna 0),
@@ -231,7 +233,7 @@ void print_board(t_game* game)
 	{
 		for(int j = 0; j < game->width; j++)
 		{
-			putchar(game->board[i][j]);   /* 'O' ou ' ' */
+			putchar(game->board[i][j]);   /* '0' ou ' ' */
 		}
 		putchar('\n');                    /* fim da linha */
 	}

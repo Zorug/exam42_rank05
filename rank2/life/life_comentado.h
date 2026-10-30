@@ -27,7 +27,7 @@ typedef struct s_game
 	int width;        /* largura do tabuleiro (numero de colunas) - argv[1] */
 	int height;       /* altura do tabuleiro (numero de linhas)   - argv[2] */
 	int iterations;   /* quantas geracoes simular                 - argv[3] */
-	char alive;       /* caractere de celula viva: 'O'                      */
+	char alive;       /* caractere de celula viva: '0' (zero, como o tester) */
 	char dead;        /* caractere de celula morta: ' ' (espaco)            */
 	int i;            /* posicao da "caneta": linha atual                   */
 	int j;            /* posicao da "caneta": coluna atual                  */
